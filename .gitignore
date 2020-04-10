@@ -1,3 +1,5 @@
+js/ReactEl/node_modules/*
+js/ReactEl/build/*
 js/ReactEl/node_modules/.cache/babel-loader/0b78287fbe31e63d53c753c21d66d902.json
 js/ReactEl/node_modules/.cache/babel-loader/0d18ef2ae775bdfe73ac2b8eeac0ccb1.json
 js/ReactEl/node_modules/.cache/babel-loader/01c1c53e145667f6abecb96a014ab81f.json
@@ -104,3 +106,12 @@ js/ReactEl/build/static/js/main.b17106b6.chunk.js
 js/ReactEl/build/static/js/main.b17106b6.chunk.js.map
 js/ReactEl/build/static/js/main.b17106b6.chunk.js
 js/ReactEl/build/static/js/main.b17106b6.chunk.js.map
+js/ReactEl/build/precache-manifest.d58b4d41b7365f01473769dbe61cbaad.js
+js/ReactEl/build/static/js/main.f0670252.chunk.js
+js/ReactEl/build/static/js/main.f0670252.chunk.js.map
+js/ReactEl/node_modules/.cache/babel-loader/8e43b90142c69b2ccefab74d3d16333a.json
+js/ReactEl/node_modules/.cache/eslint-loader/4866f354aa5caee7c7bc45619e58fd83e926f6a0.json.gz
+js/ReactEl/node_modules/.cache/terser-webpack-plugin/content-v2/sha512/1f/45/552d4fb9d19a2aa5609b417cebe2e3f7c2e5383ac5bc1f81706202b6a2d1b0dabb0f75469ba160d2b9eaae963c27798d88d8f9a3fa5d081c9e1942383be5
+js/ReactEl/node_modules/.cache/terser-webpack-plugin/index-v5/ae/d5/3dda8eb14b991578f1420dd6b6a1cf08dc74013cab77bd2fb14cce9800e5
+gitgit
+gitgit.pub
