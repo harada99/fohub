@@ -21,7 +21,7 @@ const App = () => (
     <hr/>
     Lesson 2: 
     <HelloProps name="Taro" />
-    <br/>
+    <br/>aaa
     <HelloPropsData />
     <br/>
     <HelloPropsLoop />
