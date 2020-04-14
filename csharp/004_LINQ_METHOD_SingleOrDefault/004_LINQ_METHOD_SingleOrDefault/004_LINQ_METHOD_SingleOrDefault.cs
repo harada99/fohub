@@ -49,7 +49,7 @@ namespace _004_LINQ_METHOD_SingleOrDefault
             ItemArray[4].calcVal = 500;
 
             //Idの値が1003未満のものを抽出(SingleOrDefault)
-            Prefectures query2 = ItemArray.SingleOrDefault(s => s.Id == 1002);
+            var query2 = ItemArray.SingleOrDefault(s => s.Id == 1002);
 
             //コンソール結果出力
             Console.Write("【002_LINQ_メソッド式:SingleOrDefault】\n");
