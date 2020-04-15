@@ -28,7 +28,7 @@ namespace _007_LINQ_METHOD_Any
             bool resultB = persInfoB.Any();
 
             //単独内容検索
-            persCls query = persInfoA.SingleOrDefault(s => s.Id == 1002);
+            var query = persInfoA.SingleOrDefault(s => s.Id == 1002);
 
             //LINQメソッド式、Any、コンソール結果出力
             System.Console.WriteLine("{0} : {1:g}", query.Name, query.calcVal);

@@ -50,12 +50,12 @@ namespace _003_LINQ_METHOD_CLASS_ALLAY
 
             //Idの値が1003未満のものを抽出
             //IEnumerable<Prefectures> query2 = from s in ItemArray where s.Id < 1003 select s;
-            IEnumerable<Prefectures> query2 = ItemArray.Where(s => s.Id < 1003).Select(s => s);
+            var query2 = ItemArray.Where(s => s.Id < 1003).Select(s => s);
 
             //コンソール結果出力
             Console.Write("【002_LINQ_メソッド式:Class配列使用】\n");
-            foreach(Prefectures n in query2)
-            {
+            foreach (var n in query2)
+                {
                 Console.Write("{0} : {1:g}\r\n", n.Name, n.calcVal);
             }
 

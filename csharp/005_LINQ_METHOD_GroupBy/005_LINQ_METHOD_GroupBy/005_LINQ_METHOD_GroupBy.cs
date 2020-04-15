@@ -49,13 +49,13 @@ namespace _005_LINQ_METHOD_GroupBy
             ItemArray[5].roleName = "CCC";
 
             //roleNameグループ毎に平均値を取得(GroupBy)
-            IEnumerable<IGrouping<string, Prefectures>> query2 = ItemArray.GroupBy(o => o.roleName);
+            var query2 = ItemArray.GroupBy(o => o.roleName);
 
             //コンソール結果出力
-            foreach (IGrouping<string, Prefectures> group in query2)
+            foreach (var group in query2)
             {
                 int total = 0;
-                foreach (Prefectures item in group)
+                foreach (var item in group)
                 {
                     total += item.calcVal;
                 }
