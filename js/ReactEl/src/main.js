@@ -5,7 +5,7 @@ const url = require('url')
 let win
 function createWindow () {
   win = new BrowserWindow(
-    {width: 1300, height: 1000, x:70 ,y:10 ,webPreferences:{nodeIntegration: true}}
+    {width: 1500, height: 1200, x:60 ,y:5 ,webPreferences:{nodeIntegration: true}}
   )
   win.loadURL(url.format({
     //react-scrpitでビルドされるファイルをロードする
