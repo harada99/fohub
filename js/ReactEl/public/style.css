@@ -1,10 +1,70 @@
+body {
+  margin: 20px 8px 8px 8px;
+  background-color: #f7f4f4;
+}
+article {
+  margin: 0 0 30px 0;
+}
+section {
+  padding: 0 0 10px 10px;
+  margin: 0;
+  width: 580px;
+  border: solid 1px dimgray;
+}
+button {
+  margin: 2px 10px 2px 0;
+  padding: 0 10px 0 10px;
+  height: 30px;
+  border-radius: 15px;
+  border-style: groove;
+}
+
 dt,dd {
   display : inline-table;
-  border: solid 1px darkgray;
+  border: solid 1px dimgray;
   padding: 1px 5px 1px 2px;
   margin: 0px;
   width: 60px;
 }
-dt {
+table {
+  border-collapse: collapse;
+  margin: 5px 0 5px 0;
+}
+th,td {
+  border: solid 1px dimgray;
+  padding: 1px 5px 1px 2px;
+  margin: 0px;
+}
+dt,th {
   background-color : lightgray;
 }
+dd,td {
+  background-color : white;
+}
+
+h3 {
+  margin: 0 0 10px 0;
+  padding: 0 0 1px 8px;
+  background-color: dimgray;
+  color: white;
+  width: 582px;
+  position: relative;
+  left: -10px;
+}
+
+/**
+* ここからが個別のclass定義等
+*/
+span.panel {
+  margin: 0 0 0 10px;
+  padding: 1px 4px 0 0;
+  background-color: lightgray;
+  border-radius: 10px;
+  display: inline-block;
+  width: 70px;
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+

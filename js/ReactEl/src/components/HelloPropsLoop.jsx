@@ -1,5 +1,13 @@
 import React from 'react'
 
+export const HelloPropsLoop = () =>{
+  const listData = ["boo","foo","woo"];
+  return (
+    <HelloPropsLoopList data={listData} />
+  );
+};
+export default HelloPropsLoop;
+
 const HelloPropsLoopList = (props) =>{
   const listItems = props.data.map((text, index) => {
       // Fragment構文
@@ -19,5 +27,3 @@ const HelloPropsLoopList = (props) =>{
     </div>
   );
 };
-
-export default HelloPropsLoopList;

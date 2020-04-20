@@ -3,9 +3,9 @@ import { render } from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './components/App'
-import explorerApp from './reducers'
+import { rootReducer } from './reducers/rootReducer'
 /* 状態遷移(reducers)をstoreとして取得 */
-const store = createStore(explorerApp)
+const store = createStore(rootReducer)
 /* アプリケーションをstoreを指定して描画 */
 render(
   <Provider store={store}>
