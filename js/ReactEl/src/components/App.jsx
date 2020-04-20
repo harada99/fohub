@@ -23,7 +23,7 @@ const App = () => (
     <section>
         <h3>Lesson-12 NYM メモ</h3>
         <Provider store={L12NymStore}>
-          <L12NymMain />
+          <L12NymMain state={L12NymStore.state} />
         </Provider>
     </section>
   </article>

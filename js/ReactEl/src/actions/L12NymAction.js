@@ -3,28 +3,49 @@ import * as ActionType from '../actions/ActionType';
 
 const fname = "L12NymAction";
 
-export function addMemo(text) {
-  console.info("call:%s.addMemo",fname,text);
+export function chgAddMemo(text) {
+  console.info("call:%s.chgAddMemo",fname,text);
   return {
-    type: ActionType.L12NYM_MEMO_ADD,
-    message:text
+    type: ActionType.L12NYM_CHG_ADDMEMO,
+    text:text
   }
 }
-
-// メモ削除のアクション
-export function deleteMemo(num) {
-  console.info("call:%s.deleteMemo",fname,num);
+export function execAddMemo(text) {
+  console.info("call:%s.submitAddMemo",fname,text);
   return {
-    type: ActionType.L12NYM_MEMO_DEL,
-    index:num
+    type: ActionType.L12NYM_EXEC_ADDMEMO,
+    text:text
   }
 }
 
 // メモ検索のアクション
-export function findMemo(text) {
-  console.info("call:%s.findMemo",fname,text);
+// export function chgFindMemo(ftext) {
+//   console.info("call:%s.findMemo",fname,ftext);
+//   return {
+//     type: ActionType.L12NYM_CHG_FINDMEMO,
+//     ftext:ftext
+//   }
+// }
+export function execFindMemo(ftext) {
+  console.info("call:%s.findMemo",fname,ftext);
   return {
-    type: ActionType.L12NYM_MEMO_FIND,
-    find:text
+    type: ActionType.L12NYM_EXEC_FINDMEMO,
+    ftext: ftext
+  }
+}
+
+// メモ削除のアクション
+export function chgDelMemo(num) {
+  console.info("call:%s.chgAddMemo",fname,num);
+  return {
+    type: ActionType.L12NYM_CHG_DELMEMO,
+    index:num
+  }
+}
+export function execDelMemo(num) {
+  console.info("call:%s.deleteMemo",fname,num);
+  return {
+    type: ActionType.L12NYM_EXEC_DELMEMO,
+    index:num
   }
 }

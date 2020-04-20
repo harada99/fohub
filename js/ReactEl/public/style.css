@@ -67,4 +67,9 @@ span.panel {
 .hide {
   display: none;
 }
-
+p.message {
+  margin: 5px 5px 5px 0;
+  padding: 3px 2px 3px 10px;
+  background-color: lightgray;
+  font-weight: bold;
+}

@@ -21,8 +21,8 @@ class L12Item extends Component {
     let d = this.props.value.created;
     let f = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     return (
-    <tr><th style={this.th}>No, {this.props.index}</th>
-      <td style={this.td}>{this.props.value.message}</td>
+    <tr><th style={this.th}>No.{this.props.index}</th>
+      <td style={this.td}>{this.props.value.text}</td>
       <td style={this.date}>{f}</td>
     </tr>
     );
