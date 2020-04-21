@@ -49,3 +49,12 @@ export function execDelMemo(num) {
     index:num
   }
 }
+
+// Ajax通信で取得した住所データの反映
+export function loadAddress(addressJson) {
+    console.info("call:%s.loadAddress",fname,addressJson);
+    return {
+      type: ActionType.L12NYM_LOAD_ADDRESS,
+      addressJson:addressJson
+    }
+}

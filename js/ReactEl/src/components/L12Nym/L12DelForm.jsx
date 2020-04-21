@@ -29,13 +29,13 @@ class L12DelForm extends Component {
 
   doChange(e){
     console.info("call:%s.doChange",this.cls,this.state,e);
-    this.props.dispatch(e.target.value);
+    this.props.doChange(e.target.value);
   }
 
   doExec(e){
     console.info("call:%s.doExec",this.cls,this.state,e);
     e.preventDefault();
-    this.props.dispatch(this.props.index);
+    this.props.doExec(this.props.index);
   }
 
   render(){

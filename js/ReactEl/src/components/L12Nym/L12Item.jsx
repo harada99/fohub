@@ -18,8 +18,9 @@ class L12Item extends Component {
 
   render(){
     console.info("call:%s.render",cls,this.state);    
-    let d = this.props.value.created;
-    let f = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    // let d = this.props.value.created;
+    // let f = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+    let f = this.props.value.created;
     return (
     <tr><th style={this.th}>No.{this.props.index}</th>
       <td style={this.td}>{this.props.value.text}</td>

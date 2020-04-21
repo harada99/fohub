@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { chgFindMemo,execFindMemo } from '../../actions/L12NymAction';
+import { execFindMemo } from '../../actions/L12NymAction';
 
 const cls = "L12FindForm";
 

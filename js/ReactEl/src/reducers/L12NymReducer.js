@@ -1,15 +1,27 @@
 'use strict';
 import * as ActionType from '../actions/ActionType';
+import { Util } from '../tea';
 
 const fname = 'L12NymReducer';
 const initData = {
   mode:'default',
   message:'Please type message:',
   text: '',
-  data:[{text:'sample data', created:new Date()}],
+  data: makeInitData(),
   ftext: '',
   fdata:[]
 };
+function makeInitData(){
+  console.info("call:%s.L12NymReducer",fname,makeInitData);
+  const storageData = localStorage.getItem("L12Memo");
+  if(storageData){
+    return JSON.parse(storageData).data;
+  }else{
+    return [{text:'sample AAA', created:Util.nowTimeStr()},
+            {text:'sample BBB', created:Util.nowTimeStr()},
+            {text:'sample CCC', created:Util.nowTimeStr()}];
+  }
+}
 
 // レデューサー
 export default function L12NymReducer(state=initData , action) {
@@ -27,6 +39,8 @@ export default function L12NymReducer(state=initData , action) {
       return execDelMemoReduce(state, action);
     case ActionType.L12NYM_CHG_DELMEMO:
       return chgDelMemoReduce(state, action);
+    case ActionType.L12NYM_LOAD_ADDRESS:
+        return loadAddressReduce(state, action);
     default:
       console.info("call:%s.L12NymReducer:default",fname,action);
       state = initData;
@@ -50,7 +64,7 @@ function chgAddMemoReduce(state, action){
 function execAddMemoReduce(state, action){
   console.info("call:%s.execAddMemoReduce",fname,state,action);
   const newData = [{text:action.text,
-                    created:new Date()
+                    created:Util.nowTimeStr()
                   }].concat(state.data);
   return {
     mode:'default',
@@ -114,4 +128,20 @@ function execDelMemoReduce(state, action){
     data: newdata,
     fdata: []
   }
+}
+
+function loadAddressReduce(state, action){
+  console.info("call:%s.loadAddressReduce",fname,state,action);
+  const addrList = action.addressJson.results;
+  const data = addrList.map( obj => {
+    let addr = obj.address1 + obj.address2 + obj.address3;
+    return {text:addr, created:Util.nowTimeStr()}
+  });
+  return {
+    mode:'default',
+    message: "Loaded! AddressData",
+    text: '',
+    data: data,
+    fdata: []
+  };
 }
