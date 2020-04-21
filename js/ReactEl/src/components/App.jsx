@@ -9,11 +9,12 @@ import HelloProps from '../containers/HelloProps'
 import HelloPropsData from '../containers/HelloPropsData'
 import HelloPropsLoop from '../components/HelloPropsLoop'
 import {HelloState,HelloState2} from '../components/HelloState'
-import {L04Event} from '../components/L04Event'
+import {L04Event} from '../components/L04Event' 
 import {L05Key} from '../components/L05Key'
 import {L12NymMain} from './L12Nym/L12NymMain'
 import {L12NymStore} from '../store'
 import {Provider} from 'react-redux'
+import FileContent from '../containers/FileContent'
 
 /* アプリケーション画面の定義＠ */
 const App = () => (
@@ -61,6 +62,8 @@ const App = () => (
       <FolderTreePanel />
       <hr/>
       <PathListPanel />
+      <hr/>
+      <FileContent />
     </div>
   </article> 
   </>

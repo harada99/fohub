@@ -21,7 +21,7 @@ const pathItemList = (state = initialState, action) => {
         let stat = fs.statSync(path.join(fullpath, name))
         let modified = toLocaleTimeString(stat.mtime)
         let isDirectory = stat.isDirectory()
-        pathItemList.push(createPathItem(name,modified,isDirectory))
+        pathItemList.push(createPathItem(name,modified,isDirectory,fullpath))
       })
       console.log("* 表示するパス一覧の数=" + pathItemList.length)
       return pathItemList
@@ -30,11 +30,12 @@ const pathItemList = (state = initialState, action) => {
   }
 }
 /* パスアイテムの作成 */
-const createPathItem = (name, modified, isDirectory) => {
+const createPathItem = (name, modified, isDirectory,fullpath) => {
   return {
     name: name,
     modified: modified,
     isDirectory: isDirectory,
+    fullpath: fullpath,
   }
 }
 /* 時刻の文字列変換 */
