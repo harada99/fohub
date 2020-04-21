@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addMemo } from '../../actions/L12NymAction';
+import { chgAddMemo,execAddMemo } from '../../actions/L12NymAction';
 
+const cls = "L12AddForm";
 
 class L12AddForm extends Component {
   input = {
@@ -18,44 +19,67 @@ class L12AddForm extends Component {
 
   constructor(props){
     super(props);
-    this.cls = "L12AddForm";
-    console.info("call:%s.constructor",this.cls,this.state,props);
-    this.state = {
-      message:''
-    }
-    this.doChange = this.doChange.bind(this);
-    this.doAction = this.doAction.bind(this);
+    console.info("call:%s.constructor",cls,this.state,props);
+    this.doChg = this.doChg.bind(this);
+    this.doExec = this.doExec.bind(this);
   }
 
-  doChange(e){
-    console.info("call:%s.doChange",this.cls,this.state,e);
-    this.setState({
-      message: e.target.value
-    });
+  doChg(e){
+    console.info("call:%s.doChg",cls,this.state,e);
+    this.props.doChg(e.target.value);
   }
 
-  doAction(e){
-    console.info("call:%s.doAction",this.cls,this.state,e);
+  doExec(e){
+    console.info("call:%s.doExec",cls,this.state,e);
     e.preventDefault();
-    let action = addMemo(this.state.message);
-    this.props.dispatch(action);
-    this.setState({
-      message: ''
-    });
+    this.props.doExec(this.props.text);
+
+    //※mapDispatchToPropsは、これを外に出しているだけ？
+    //let action = addMemo(this.state.message);
+    //this.props.dispatch(action);
+
+    // ※Reduxを使うとときは「基本的に」setStateを書かない
+    //   書いては行けないではない。ケース・バイ・ケースなので適宜うまくやって
+    //  http://cloudcafe.tech/?p=2259
+    //  https://made.livesense.co.jp/entry/2016/09/29/080000
+    // this.setState({
+    //   text: ''
+    // });
   }
 
   render(){
-    console.info("call:%s.render",this.cls,this.state);
+    console.info("call:%s.render",cls,this.state);
     return (
       <div id="_L12AddForm">
-        <p style={this.message}>{this.props.message}</p>
-        <form onSubmit={this.doAction}>
-        <input type="text" size="40" onChange={this.doChange}
-          style={this.input} value={this.state.message} required />
-        <input type="submit" style={this.btn} value="Add"/>
+        <p style={this.message} className="message">{this.props.message}</p>
+        <form onSubmit={this.doExec}>
+        <input type="text" size="40" onChange={this.doChg}
+          style={this.input} value={this.props.text} required />
+        <input type="submit" style={this.btn} value="Add"></input>
         </form>
       </div>
     );
   }
 }
-export default connect((state)=>state)(L12AddForm);
+
+const mapStateToProps = (state) => {
+  // prppsとして参照したい値を定義する(stateを直接参照しない)
+  return {
+    text: state.text,
+    message: state.message
+  }
+}
+const mapDispatchToProps = (dispatch) => ({
+  doChg: (text) => {
+    console.info("call:%s.mapDispatchToProps.doChg",cls,text);    
+    let action = chgAddMemo(text);
+    dispatch(action);
+  },
+  doExec: (text) => {
+    console.info("call:%s.mapDispatchToProps.doExec",cls,text);    
+    let action = execAddMemo(text);
+    dispatch(action);
+  }
+})
+
+export default L12AddForm = connect(mapStateToProps, mapDispatchToProps)(L12AddForm);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findMemo } from '../../actions/L12NymAction';
+import { chgFindMemo,execFindMemo } from '../../actions/L12NymAction';
 
+const cls = "L12FindForm";
 
 class L12FindForm extends Component  {
   input = {
@@ -9,49 +10,63 @@ class L12FindForm extends Component  {
     color:"#006",
     padding:"0px",
   }
-  btn = {
-    fontSize:"12pt",
-    color:"#006",
-    padding:"1px 10px",
-  }
+  // btn = {
+  //   fontSize:"12pt",
+  //   color:"#006",
+  //   padding:"1px 10px",
+  // }
 
   constructor(props){
     super(props);
-    this.cls = "L12FindForm";
     console.info("call:%s.constructor",this.cls,this.state,props);
-    this.state = {
-      find:''
-    }
-    this.doChange = this.doChange.bind(this);
-    this.doAction = this.doAction.bind(this);
+    // this.state = {
+    //   find:''
+    // }
+    this.doExec = this.doExec.bind(this);
   }
 
+  // doChg(e){
+  //   console.info("call:%s.doChg",cls,this.state,e);
+  //   this.props.doChg(e.target.value);
+  // }
 
-  doChange(e){
-    console.info("call:%s.doChange",this.cls,this.state,e);
-    this.setState({
-      find: e.target.value
-    });
-  }
-
-
-  doAction(e){
-    console.info("call:%s.doAction",this.cls,this.state,e);
+  doExec(e){
+    console.info("call:%s.doExec",cls,this.state,e);
     e.preventDefault();
-    let action = findMemo(this.state.find);
-    this.props.dispatch(action);
+    this.props.doExec(e.target.value);
   }
-
 
   render(){
-    console.info("call:%s.render",this.cls);
+    console.info("call:%s.render",cls);
+    // 入力毎にフィルタリングするよう変更
+    // <input type="submit" style={this.btn} value="Find"/>
     return (
-      <form onSubmit={this.doAction} id="_L12FindForm">
-        <input type="text" size="10" onChange={this.doChange}
-          style={this.input} value={this.state.message} />
-        <input type="submit" style={this.btn} value="Find"/>
-      </form>
+      <>
+      Find Fillter：
+      <input type="text" size="10" onChange={this.doExec} style={this.input} value={this.props.ftext} />
+      </>
     );
   }
 }
-export default connect((state)=>state)(L12FindForm);
+
+const mapStateToProps = (state) => {
+  // prppsとして参照したい値を定義する(stateを直接参照しない)
+  return {
+    ftext: state.ftext,
+    fdata: state.fdata
+  }
+}
+const mapDispatchToProps = (dispatch) => ({
+  // doChg: (ftext) => {
+  //   console.info("call:%s.mapDispatchToProps.doChg",cls,ftext);    
+  //   let action = chgFindMemo(ftext);
+  //   dispatch(action);
+  // },
+  doExec: (ftext) => {
+    console.info("call:%s.mapDispatchToProps.doExec",cls,ftext);    
+    let action = execFindMemo(ftext);
+    dispatch(action);
+  }
+})
+
+export default L12FindForm = connect(mapStateToProps, mapDispatchToProps)(L12FindForm);

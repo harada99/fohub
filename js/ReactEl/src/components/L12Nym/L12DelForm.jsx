@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteMemo } from '../../actions/L12NymAction';
+import { chgDelMemo,execDelMemo } from '../../actions/L12NymAction';
+
+const cls = "L12DelForm";
 
 class L12DelForm extends Component {
   input = {
@@ -17,52 +19,62 @@ class L12DelForm extends Component {
 
   constructor(props){
     super(props);
-    this.cls = "L12DelForm";
     console.info("call:%s.constructor",this.cls,this.state,props);
     this.state = {
-      number:0
+      index:0
     }
     this.doChange = this.doChange.bind(this);
-    this.doAction = this.doAction.bind(this);
+    this.doExec = this.doExec.bind(this);
   }
-
 
   doChange(e){
     console.info("call:%s.doChange",this.cls,this.state,e);
-    this.setState({
-      number: e.target.value
-    });
+    this.props.dispatch(e.target.value);
   }
 
-
-  doAction(e){
-    console.info("call:%s.doAction",this.cls,this.state,e);
+  doExec(e){
+    console.info("call:%s.doExec",this.cls,this.state,e);
     e.preventDefault();
-    let action = deleteMemo(this.state.number);
-    this.props.dispatch(action);
-    this.setState({
-      number: 0
-    });
+    this.props.dispatch(this.props.index);
   }
-
 
   render(){
     console.info("call:%s.render",this.cls,this.state);
     let n = 0;
     let items = this.props.data.map((value)=>(
-      <option key={n} value={n++}>{value.message.substring(0,10)}</option>
+      <option key={n} value={n++}>{value.text.substring(0,10)}</option>
     ));
+    // <select onChange={this.doChange}
     return (
       <div id="_L12DelForm">
-        <form onSubmit={this.doAction}>
-        <select onChange={this.doChange}
-          defaultValue="-1" style={this.input}>
-          {items}
-        </select>
+        <form onSubmit={this.doExec}>
+          <select defaultValue="-1"  onChange={this.doChange} style={this.input}>
+            {items}
+          </select>
         <input type="submit" style={this.btn} value="Del"/>
         </form>
       </div>
     );
   }
 }
-export default connect((state)=>state)(L12DelForm);
+
+const mapStateToProps = (state) => {
+  return {
+    index: state.index,
+    data: state.data
+  }
+}
+const mapDispatchToProps = (dispatch) => ({
+  doChg: (num) => {
+    console.info("call:%s.mapDispatchToProps.doChg",cls,num);    
+    let action = chgDelMemo(num);
+    dispatch(action);
+  },
+  doExec: (num) => {
+    console.info("call:%s.mapDispatchToProps.doExec",cls,num);    
+    let action = execDelMemo(num);
+    dispatch(action);
+  }
+})
+
+export default L12DelForm = connect(mapStateToProps, mapDispatchToProps)(L12DelForm);

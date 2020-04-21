@@ -3,26 +3,33 @@ import * as ActionType from '../actions/ActionType';
 
 const fname = 'L12NymReducer';
 const initData = {
-  data:[{message:'sample data', created:new Date()}],
-  message:'please type message:',
   mode:'default',
+  message:'Please type message:',
+  text: '',
+  data:[{text:'sample data', created:new Date()}],
+  ftext: '',
   fdata:[]
 };
 
 // レデューサー
-export default function L12NymReducer(state = initData, action) {
+export default function L12NymReducer(state=initData , action) {
   console.info("call:%s.L12NymReducer",fname,action);
   switch (action.type) {
-    case ActionType.L12NYM_MEMO_ADD:
-      return addReduce(state, action);
-
-    case ActionType.L12NYM_MEMO_DEL:
-      return deleteReduce(state, action);
-
-    case ActionType.L12NYM_MEMO_FIND:
-      return findReduce(state, action);
-
+    case ActionType.L12NYM_CHG_ADDMEMO:
+      return chgAddMemoReduce(state, action);
+    case ActionType.L12NYM_EXEC_ADDMEMO:
+      return execAddMemoReduce(state, action);
+    // case ActionType.L12NYM_CHG_FINDMEMO:
+    //   return chgFindMemoReduce(state, action);
+    case ActionType.L12NYM_EXEC_FINDMEMO:
+      return execFindMemoReduce(state, action);
+    case ActionType.L12NYM_EXEC_DELMEMO:
+      return execDelMemoReduce(state, action);
+    case ActionType.L12NYM_CHG_DELMEMO:
+      return chgDelMemoReduce(state, action);
     default:
+      console.info("call:%s.L12NymReducer:default",fname,action);
+      state = initData;
       return state;
   }
 }
@@ -30,49 +37,81 @@ export default function L12NymReducer(state = initData, action) {
 // レデュースアクション
 
 // メモ追加のレデュース処理
-function addReduce(state, action){
-  console.info("call:%s.addReduce",fname,state,action);
-  let data = {
-    message:action.message,
-    created:new Date()
-  };
-  let newdata = state.data.slice();
-  newdata.unshift(data);
+function chgAddMemoReduce(state, action){
+  console.info("call:%s.chgAddMemoReduce",fname,state,action);
   return {
-    data:newdata,
-    message:'Added!',
+    mode: 'default',
+    message: `Now input message...[${action.text}]`,
+    text: action.text,
+    data: state.data,
+    fdata: state.fdata
+  };
+}
+function execAddMemoReduce(state, action){
+  console.info("call:%s.execAddMemoReduce",fname,state,action);
+  const newData = [{text:action.text,
+                    created:new Date()
+                  }].concat(state.data);
+  return {
     mode:'default',
-    fdata:[]
+    message: `Added! [${action.text}]`,
+    text: '',
+    data: newData,
+    fdata: []
   };
 }
 
 // メモ検索のレデュース処理
-function findReduce(state, action){
-  console.info("call:%s.findReduce",fname,state,action);
-  let f = action.find;
+// function chgFindMemoReduce(state, action){
+//   console.info("call:%s.chgFindMemoReduce",fname,state,action);
+//   return {
+//     mode: 'default',
+//     message: state.message,
+//     text: state.text,
+//     data: state.data,
+//     ftext: action.ftext,
+//     fdata: []
+//   };
+// }
+function execFindMemoReduce(state, action){
+  console.info("call:%s.execFindMemoReduce",fname,state,action);
+  let f = action.ftext;
   let fdata = [];
   state.data.forEach((value)=>{
-    if (value.message.indexOf(f) >= 0){
+    if (value.text.indexOf(f) >= 0){
       fdata.push(value);
     }
   });
   return {
-    data:state.data,
-    message:'find "' + f + '":',
-    mode:'find',
-    fdata:fdata
+    mode: 'find',
+    message: `Find...[${f}] (${fdata.length}件)`,
+    text: state.text,
+    data: state.data,
+    ftext: action.ftext,
+    fdata: fdata
   };
 }
 
 // メモ削除のレデュース処理
-function deleteReduce(state, action){
+function chgDelMemoReduce(state, action){
+  console.info("call:%s.chgDelMemoReduce",fname,state,action);
+  return {
+    mode: 'default',
+    message: `Delete target...[${action.index}]`,
+    text: state.text,
+    data: state.data,
+    fdata: state.fdata
+  };
+}
+function execDelMemoReduce(state, action){
   console.info("call:%s.deleteReduce",fname,state,action);
   let newdata = state.data.slice();
   newdata.splice(action.index, 1);
   return {
-    data:newdata,
-    message:'delete "' + action.index + '":',
-    mode:'delete',
-    fdata:[]
+    mode: 'delete',
+    message: `Deleted! [${action.index}]`,
+    text: '',
+    data: newdata,
+    fdata: []
   }
 }
