@@ -17,7 +17,7 @@ const AddressBar = ({ dispatch }) => {
         console.log('==> イベント発行(コンテナ) openButtonClickEvent rootPath=' + folderPath.value)
         dispatch(openButtonClickEvent(folderPath.value))
        }}>
-        <input style={inputStyle} value="d:/dev/fohub" ref={node => {
+        <input style={inputStyle} value="" ref={node => {
           folderPath = node
         }} />
         <button type="submit">

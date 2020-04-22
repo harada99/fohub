@@ -5,9 +5,9 @@ const FileContent = (props) =>{
     return (
     <table>
     <tr>
-      <th>FileContent</th>
+      <th>FileContent({props.fileContent.File})</th>
     </tr>
-    <tr><td>{props.fileContent}</td></tr>
+    <tr><td>{props.fileContent.Content}</td></tr>
     </table>
     );
 };
